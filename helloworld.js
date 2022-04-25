@@ -1,10 +1,12 @@
 let http = require("http");
 let url = require("url");
 let date = require("./date");
+let fs = require("fs");
 
 http
   .createServer(function (req, res) {
     let query = url.parse(req.url, true).query;
+    console.log(url.parse(req.url, true));
     let text = query.year + " " + query.month;
     res.writeHead(200, { "Content-Type": "text/html" });
     res.write(
@@ -12,7 +14,7 @@ http
         date.date() +
         ".\nYou are requesting this from " +
         req.url +
-        " and " +
+        " so it is " +
         text
     );
     res.end();
