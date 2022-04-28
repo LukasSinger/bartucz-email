@@ -42,7 +42,7 @@ function handleRequest(req, res) {
   } else {
     file =
       q.pathname == "/" ? "public/index.html" : `public/${q.pathname}.html`;
-    servePage(file, res);
+    return servePage(file, res);
   }
 }
 
