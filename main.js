@@ -1,3 +1,4 @@
+require("dotenv").config();
 let http = require("http");
 let url = require("url");
 let fs = require("fs");
@@ -16,7 +17,7 @@ let transporter = nodemailer.createTransport({
 });
 let mailOptions = {
   from: process.env.USERNAME,
-  to: process.env.ME,
+  to: process.env.BARTUCZ,
   subject: "",
   html: ""
 };
@@ -32,9 +33,11 @@ function handleRequest(req, res) {
     mailOptions.subject = q.query.subject;
     mailOptions.html = q.query.content;
     transporter.sendMail(mailOptions, (err) => {
-      if (err) file = "public/oops.html";
-      else file = "public/success.html";
-      servePage(file);
+      if (err) {
+        console.log(err);
+        file = "public/oops.html";
+      } else file = "public/success.html";
+      servePage(file, res);
     });
   } else {
     file =
