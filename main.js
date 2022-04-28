@@ -34,12 +34,12 @@ function handleRequest(req, res) {
     transporter.sendMail(mailOptions, (err) => {
       if (err) file = "public/oops.html";
       else file = "public/success.html";
-      servePage(file);
+      return servePage(file);
     });
   } else {
     file =
       q.pathname == "/" ? "public/index.html" : `public/${q.pathname}.html`;
-    servePage(file, res);
+    return servePage(file, res);
   }
 }
 
